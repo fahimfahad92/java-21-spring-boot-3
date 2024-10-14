@@ -1,0 +1,30 @@
+name: mysql_redis
+
+services:
+    redis:
+        image: "redis:7.4"
+        ports:
+          - "6379:6379"
+    db:
+        image: mysql:5.7
+        restart: always
+        secrets:
+            - db-password
+            - user-db-password
+        volumes:             
+             - ./init-script:/docker-entrypoint-initdb.d # load initialization script
+             - ./mysql-data:/var/lib/mysql/ # load already created data
+        environment:  
+            - MYSQL_DATABASE=demo # docker will create a db named demo
+            - MYSQL_USER=fahim # docker will create an user with username fahim and grant access to demo db
+            - MYSQL_PASSWORD_FILE=/run/secrets/user-db-password # user password file
+            - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password # root password file
+        ports:
+          - 3306:3306
+volumes:
+  mysql-data:
+secrets:
+  db-password:
+    file: password.txt
+  user-db-password:
+    file: password.txt

@@ -1,0 +1,34 @@
+package com.example.java21sb3;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import com.example.java21sb3.db.UserRepository;
+import com.example.java21sb3.user.User;
+import java.util.List;
+import java.util.Random;
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+// @Disabled
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class UserRepositoryTest extends ContainerInitializer {
+
+  @Autowired UserRepository userRepository;
+
+  @Test
+  @Order(1)
+  void shouldCreateUser() {
+    List<User> userList =
+        List.of(
+            new User(1L, "Fahim" + new Random().nextInt()),
+            new User(2L, "Fahim" + new Random().nextInt()));
+    userRepository.saveAll(userList);
+  }
+
+  @Test
+  @Order(2)
+  void shouldGetAllUser() {
+    assertEquals(2, userRepository.findAll().size());
+  }
+}
