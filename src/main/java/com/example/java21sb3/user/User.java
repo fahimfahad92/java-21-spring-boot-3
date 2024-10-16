@@ -1,21 +1,18 @@
 package com.example.java21sb3.user;
 
 import jakarta.persistence.*;
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "user")
 public class User {
 
   @Id
+  @GeneratedValue(strategy = IDENTITY)
   Long id;
 
   @Column(name = "name")
   String name;
-
-  public User(String name) {
-    this.id = 0L;
-    this.name = name;
-  }
 
   public User(Long id, String name) {
     this.id = id;
