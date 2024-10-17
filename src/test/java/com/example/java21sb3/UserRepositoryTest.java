@@ -1,5 +1,6 @@
 package com.example.java21sb3;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.example.java21sb3.db.UserRepository;
@@ -9,7 +10,7 @@ import java.util.Random;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-//@Disabled
+@Disabled
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserRepositoryTest extends ContainerInitializer {
 
@@ -31,9 +32,9 @@ public class UserRepositoryTest extends ContainerInitializer {
     userRepository.saveAll(userList);
   }
 
-//  @Test
-//  @Order(3)
-//  void shouldGetAllUser() {
-//    assertEquals(2, userRepository.findAll().size());
-//  }
+  @Test
+  @Order(3)
+  void shouldGetAllUser() {
+    assertEquals(2, userRepository.findAll().size());
+  }
 }
