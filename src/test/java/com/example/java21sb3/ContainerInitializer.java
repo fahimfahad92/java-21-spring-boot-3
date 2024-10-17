@@ -27,20 +27,26 @@ public abstract class ContainerInitializer {
   private static final String SQS_QUEUE = "Test_Queue.fifo";
   private static final String SQS_QUEUE_FOR_PRODUCER = "Test_Queue_2.fifo";
   private static final String LOCAL_STACK_VERSION = "localstack/localstack:3.0";
+
   @Container
   protected static RedisContainer redis =
       new RedisContainer(DockerImageName.parse("redis:7.4")).withExposedPorts(6379);
+
   protected static SqsClient sqsClient;
   protected static String queueUrl;
+
   @Container
   protected static LocalStackContainer localStack =
-          new LocalStackContainer(DockerImageName.parse(LOCAL_STACK_VERSION))
-                  .withServices(SQS)
-                  .withReuse(true);
+      new LocalStackContainer(DockerImageName.parse(LOCAL_STACK_VERSION))
+          .withServices(SQS)
+          .withReuse(true);
+
   @Container
   protected static MySQLContainer mySQLContainer =
-      new MySQLContainer<>(DockerImageName.parse("mysql:5.7")).withExposedPorts(3306)
-              .withDatabaseName("test");
+      new MySQLContainer<>(DockerImageName.parse("mysql:5.7"))
+          .withExposedPorts(3306)
+          .withDatabaseName("test");
+
   private static GetQueueAttributesResponse attributes;
 
   static {
@@ -55,13 +61,13 @@ public abstract class ContainerInitializer {
     registry.add("spring.datasource.hikari.jdbc-url", mySQLContainer::getJdbcUrl);
 
     // can be used if Hikari is not used
-//    registry.add("spring.datasource.username", mySQLContainer::getUsername);
-//    registry.add("spring.datasource.password", mySQLContainer::getPassword);
+    //    registry.add("spring.datasource.username", mySQLContainer::getUsername);
+    //    registry.add("spring.datasource.password", mySQLContainer::getPassword);
 
     registry.add("database.username", mySQLContainer::getUsername);
     registry.add("database.password", mySQLContainer::getPassword);
 
-    registry.add("spring.jpa.hibernate.ddl-auto",() -> "create");
+    registry.add("spring.jpa.hibernate.ddl-auto", () -> "create");
 
     registry.add("spring.data.redis.host", redis::getHost);
     registry.add("spring.data.redis.port", () -> redis.getMappedPort(6379).toString());
@@ -70,7 +76,7 @@ public abstract class ContainerInitializer {
     registry.add("spring.cloud.aws.credentials.access-key", () -> localStack.getAccessKey());
     registry.add("spring.cloud.aws.credentials.secret-key", () -> localStack.getSecretKey());
     registry.add(
-            "spring.cloud.aws.sqs.endpoint", () -> localStack.getEndpointOverride(SQS).toString());
+        "spring.cloud.aws.sqs.endpoint", () -> localStack.getEndpointOverride(SQS).toString());
   }
 
   @BeforeAll
@@ -88,59 +94,59 @@ public abstract class ContainerInitializer {
 
   static void createSqsClient() {
     sqsClient =
-            SqsClient.builder()
-                    .region(Region.US_EAST_1)
-                    .endpointOverride(localStack.getEndpointOverride(SQS))
-                    .credentialsProvider(
-                            StaticCredentialsProvider.create(
-                                    AwsBasicCredentials.create(
-                                            localStack.getAccessKey(), localStack.getSecretKey())))
-                    .build();
+        SqsClient.builder()
+            .region(Region.US_EAST_1)
+            .endpointOverride(localStack.getEndpointOverride(SQS))
+            .credentialsProvider(
+                StaticCredentialsProvider.create(
+                    AwsBasicCredentials.create(
+                        localStack.getAccessKey(), localStack.getSecretKey())))
+            .build();
   }
 
   static void createSqsQueues() {
     sqsClient.createQueue(
-            CreateQueueRequest.builder()
-                    .queueName(SQS_QUEUE)
-                    .attributes(
-                            Map.of(
-                                    QueueAttributeName.FIFO_QUEUE,
-                                    "true",
-                                    QueueAttributeName.CONTENT_BASED_DEDUPLICATION,
-                                    "true"))
-                    .build());
+        CreateQueueRequest.builder()
+            .queueName(SQS_QUEUE)
+            .attributes(
+                Map.of(
+                    QueueAttributeName.FIFO_QUEUE,
+                    "true",
+                    QueueAttributeName.CONTENT_BASED_DEDUPLICATION,
+                    "true"))
+            .build());
 
     CreateQueueResponse response =
-            sqsClient.createQueue(
-                    CreateQueueRequest.builder()
-                            .queueName(SQS_QUEUE_FOR_PRODUCER)
-                            .attributes(
-                                    Map.of(
-                                            QueueAttributeName.FIFO_QUEUE,
-                                            "true",
-                                            QueueAttributeName.CONTENT_BASED_DEDUPLICATION,
-                                            "true"))
-                            .build());
+        sqsClient.createQueue(
+            CreateQueueRequest.builder()
+                .queueName(SQS_QUEUE_FOR_PRODUCER)
+                .attributes(
+                    Map.of(
+                        QueueAttributeName.FIFO_QUEUE,
+                        "true",
+                        QueueAttributeName.CONTENT_BASED_DEDUPLICATION,
+                        "true"))
+                .build());
 
     queueUrl = response.queueUrl();
   }
 
   protected void loadAttributes() {
     attributes =
-            sqsClient.getQueueAttributes(
-                    GetQueueAttributesRequest.builder()
-                            .queueUrl(queueUrl)
-                            .attributeNamesWithStrings("All")
-                            .build());
+        sqsClient.getQueueAttributes(
+            GetQueueAttributesRequest.builder()
+                .queueUrl(queueUrl)
+                .attributeNamesWithStrings("All")
+                .build());
   }
 
   protected Integer numberOfMessagesInQueue() {
     return Integer.parseInt(
-            attributes.attributes().get(QueueAttributeName.APPROXIMATE_NUMBER_OF_MESSAGES));
+        attributes.attributes().get(QueueAttributeName.APPROXIMATE_NUMBER_OF_MESSAGES));
   }
 
   protected Integer numberOfMessagesNotVisibleInQueue() {
     return Integer.parseInt(
-            attributes.attributes().get(QueueAttributeName.APPROXIMATE_NUMBER_OF_MESSAGES_NOT_VISIBLE));
+        attributes.attributes().get(QueueAttributeName.APPROXIMATE_NUMBER_OF_MESSAGES_NOT_VISIBLE));
   }
 }

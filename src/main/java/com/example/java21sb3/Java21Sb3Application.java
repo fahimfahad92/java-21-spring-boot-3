@@ -1,9 +1,19 @@
 package com.example.java21sb3;
 
-import com.example.java21sb3.db.UserRepository;import com.example.java21sb3.redis.RedisService;import com.example.java21sb3.user.User;import org.slf4j.Logger;import org.slf4j.LoggerFactory;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.boot.SpringApplication;
+import com.example.java21sb3.db.UserRepository;
+import com.example.java21sb3.redis.RedisService;
+import com.example.java21sb3.user.User;
+import java.util.List;
+import java.util.Random;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationListener;import org.springframework.context.event.ContextRefreshedEvent;import org.springframework.stereotype.Component;import reactor.util.annotation.NonNull;
-import java.util.List;import java.util.Random;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
+import reactor.util.annotation.NonNull;
 
 @SpringBootApplication
 public class Java21Sb3Application {

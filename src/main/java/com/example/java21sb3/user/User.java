@@ -1,7 +1,8 @@
 package com.example.java21sb3.user;
 
-import jakarta.persistence.*;
 import static jakarta.persistence.GenerationType.IDENTITY;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "user")
@@ -18,10 +19,8 @@ public class User {
     this.id = id;
     this.name = name;
   }
-  
-  public User() {
-    
-  }
+
+  public User() {}
 
   public Long getId() {
     return id;
