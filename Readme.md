@@ -12,6 +12,7 @@ I added tests for MySQL, Redis and SQS using test container. We can execute each
 
 **Note:** I added SQS test using Localstack. During the test, SQS test will work even if there is no SQS in AWS.
 But we will need to have SQS in AWS if we want to run the application.
+SQS is not created in AWS. As a result normally it will not work at the moment.
 
 **Dockerfile:**
 I added a Dockerfile to generate an optimized image for my application.

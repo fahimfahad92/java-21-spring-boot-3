@@ -46,16 +46,16 @@ class StartupApplicationListenerExample implements ApplicationListener<ContextRe
 
     List<User> users = userRepository.findAll();
 
-    users.forEach(u -> logger.info(u.getId() + " " + u.getName()));
+    users.forEach(u -> logger.info("{} {}", u.getId(), u.getName()));
 
     // redis
     redisService.setData("user", user);
     User userFromRedis = redisService.getData("user");
-    logger.info("Getting user from redis " + userFromRedis.toString());
+    logger.info("Getting user from redis {}", userFromRedis.toString());
 
     // redisson
     redisService.setDataRedisson("user2", user);
     User userFromRedisson = redisService.getDataRedisson("user2");
-    logger.info("Getting user from redis " + userFromRedisson.toString());
+    logger.info("Getting user from redis {}", userFromRedisson.toString());
   }
 }
