@@ -27,8 +27,8 @@ public class UserRepositoryTest extends ContainerInitializer {
   void shouldCreateUser() {
     List<User> userList =
         List.of(
-            new User(0L, "Fahim" + new Random().nextInt()),
-            new User(0L, "Fahim" + new Random().nextInt()));
+            new User("Fahim" + new Random().nextInt()),
+            new User("Fahim" + new Random().nextInt()));
     userRepository.saveAll(userList);
   }
 

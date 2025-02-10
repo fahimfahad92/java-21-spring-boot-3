@@ -40,7 +40,7 @@ class StartupApplicationListenerExample implements ApplicationListener<ContextRe
 
   @Override
   public void onApplicationEvent(@NonNull ContextRefreshedEvent event) {
-    User user = new User(0L, "Fahim" + new Random().nextInt());
+    User user = new User("Fahim" + new Random().nextInt());
     logger.info("Saving user {}", user.getName());
     userRepository.save(user);
 
