@@ -1,9 +1,9 @@
-//package com.example.java21sb3.sqs;
+// package com.example.java21sb3.sqs;
 //
-//import org.springframework.boot.context.properties.ConfigurationProperties;
+// import org.springframework.boot.context.properties.ConfigurationProperties;
 //
-//@ConfigurationProperties(prefix = "events.queues")
-//public class EventQueuesProperties {
+// @ConfigurationProperties(prefix = "events.queues")
+// public class EventQueuesProperties {
 //
 //  private String testQueue;
 //
@@ -14,4 +14,4 @@
 //  public void setTestQueue(String testQueue) {
 //    this.testQueue = testQueue;
 //  }
-//}
+// }
