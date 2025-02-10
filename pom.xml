@@ -32,7 +32,9 @@
         <spotless-maven-plugin.version>2.41.1</spotless-maven-plugin.version>
         <redisson.version>3.44.0</redisson.version>
         <spring-cloud-aws-starter-sqs.version>3.0.3</spring-cloud-aws-starter-sqs.version>
-        <testcontainers-redis.version>2.2.2</testcontainers-redis.version>
+        <testcontainers-redis.version>2.2.3</testcontainers-redis.version>
+        <mysql.testcontainer.version>1.20.4</mysql.testcontainer.version>
+        <testcontainers.version>1.20.4</testcontainers.version>
     </properties>
     <dependencies>
         <dependency>
@@ -82,11 +84,13 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers</artifactId>
+            <version>${testcontainers.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>mysql</artifactId>
+            <version>${mysql.testcontainer.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
