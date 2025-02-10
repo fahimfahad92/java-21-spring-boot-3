@@ -56,6 +56,6 @@ class StartupApplicationListenerExample implements ApplicationListener<ContextRe
     // redisson
     redisService.setDataRedisson("user2", user);
     User userFromRedisson = redisService.getDataRedisson("user2");
-    logger.info("Getting user from redis {}", userFromRedisson.toString());
+    logger.info("Getting user from redisson {}", userFromRedisson.toString());
   }
 }

@@ -28,4 +28,12 @@ public class User {
   public String getName() {
     return name;
   }
+
+  @Override
+  public String toString() {
+    return "User{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            '}';
+  }
 }
