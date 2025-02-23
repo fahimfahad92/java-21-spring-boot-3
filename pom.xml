@@ -35,6 +35,8 @@
         <testcontainers-redis.version>2.2.3</testcontainers-redis.version>
         <mysql.testcontainer.version>1.20.4</mysql.testcontainer.version>
         <testcontainers.version>1.20.4</testcontainers.version>
+        <springdoc-openapi-starter-webmvc-ui.version>2.6.0</springdoc-openapi-starter-webmvc-ui.version>
+        <springdoc-openapi-ui.version>1.8.0</springdoc-openapi-ui.version>
     </properties>
     <dependencies>
         <dependency>
@@ -115,6 +117,19 @@
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!--Swagger-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc-openapi-ui.version}</version>
+        </dependency>
+        <!--Swagger-->
 
     </dependencies>
     <build>
