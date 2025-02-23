@@ -35,6 +35,7 @@
         <testcontainers-redis.version>2.2.3</testcontainers-redis.version>
         <mysql.testcontainer.version>1.20.4</mysql.testcontainer.version>
         <testcontainers.version>1.20.4</testcontainers.version>
+        <bucket4j_jdk17-core.version>8.14.0</bucket4j_jdk17-core.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.6.0</springdoc-openapi-starter-webmvc-ui.version>
         <springdoc-openapi-ui.version>1.8.0</springdoc-openapi-ui.version>
     </properties>
@@ -117,6 +118,14 @@
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!--Rate limiting-->
+        <dependency>
+            <groupId>com.bucket4j</groupId>
+            <artifactId>bucket4j_jdk17-core</artifactId>
+            <version>${bucket4j_jdk17-core.version}</version>
+        </dependency>
+        <!--Rate limiting-->
 
         <!--Swagger-->
         <dependency>
