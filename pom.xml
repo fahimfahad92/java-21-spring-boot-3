@@ -31,7 +31,7 @@
         <hikari-cp.version>6.0.0</hikari-cp.version>
         <spotless-maven-plugin.version>2.41.1</spotless-maven-plugin.version>
         <redisson.version>3.45.0</redisson.version>
-        <spring-cloud-aws-starter-sqs.version>3.0.3</spring-cloud-aws-starter-sqs.version>
+        <spring-cloud-aws-starter-sqs.version>3.3.0</spring-cloud-aws-starter-sqs.version>
         <testcontainers-redis.version>2.2.3</testcontainers-redis.version>
         <mysql.testcontainer.version>1.20.4</mysql.testcontainer.version>
         <testcontainers.version>1.20.4</testcontainers.version>
