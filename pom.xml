@@ -28,7 +28,7 @@
     </scm>
     <properties>
         <java.version>21</java.version>
-        <hikari-cp.version>6.0.0</hikari-cp.version>
+        <hikari-cp.version>6.2.1</hikari-cp.version>
         <spotless-maven-plugin.version>2.41.1</spotless-maven-plugin.version>
         <redisson.version>3.45.0</redisson.version>
         <spring-cloud-aws-starter-sqs.version>3.0.3</spring-cloud-aws-starter-sqs.version>
